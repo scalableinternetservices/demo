@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  url: MyString
-  community_id: 
+  title: 'Learning to garden'
+  url: 'http://www.gardening.com'
+  community: one
 
 two:
-  title: MyString
-  url: MyString
-  community_id: 
+  title: 'Learning to Paint'
+  url: 'http://www.painting.com'
+  community: two
