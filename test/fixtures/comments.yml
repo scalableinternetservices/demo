@@ -1,11 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  message: MyText
-  submission_id: 
-  parent_id: 
+  message: 'This was a great article'
+  submission: one
+  parent_id:
 
 two:
-  message: MyText
-  submission_id: 
-  parent_id: 
+  message: 'I disagree.'
+  submission: one
+  parent_id:
+
