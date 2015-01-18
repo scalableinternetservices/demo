@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :community_id %><br>
-    <%= f.text_field :community_id %>
+    <%= collection_select(:submission, :community_id, Community.all, :id, :name) %>
   </div>
   <div class="actions">
     <%= f.submit %>
