@@ -15,5 +15,9 @@
   <%= @submission.community %>
 </p>
 
+<div>
+  <%= link_to("Comment on this submission", controller: "comments", action: "new", comment: {submission_id: @submission.id} ) %>
+</div>
+
 <%= link_to 'Edit', edit_submission_path(@submission) %> |
 <%= link_to 'Back', submissions_path %>
