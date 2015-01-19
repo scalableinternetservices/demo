@@ -21,7 +21,7 @@ class CommentsControllerTest < ActionController::TestCase
       post :create, comment: { message: @comment.message, parent_id: @comment.parent_id, submission_id: @comment.submission_id }
     end
 
-    assert_redirected_to comment_path(assigns(:comment))
+    assert_redirected_to submission_path(assigns(:comment).submission)
   end
 
   test "should show comment" do

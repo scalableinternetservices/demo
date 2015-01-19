@@ -1,0 +1,7 @@
+<div>
+  <div>
+    <%= comment.message %><br>
+    <%= link_to("Reply", controller: "comments", action: "new", comment: {parent_id: comment.id, submission_id: comment.submission.id} ) %>
+  </div>
+  <%= render comment.replies %>
+</div>
