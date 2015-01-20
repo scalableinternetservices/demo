@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Submissions</h1>
+<h1>Demo App</h1>
 
 <table>
   <thead>
@@ -15,17 +15,16 @@
   <tbody>
     <% @submissions.each do |submission| %>
       <tr>
-        <td><%= submission.title %></td>
+        <td><%= link_to(submission.title, submission.url) %></td>
         <td><%= submission.url %></td>
         <td><%= submission.community.name %></td>
-        <td><%= link_to 'Show', submission %></td>
-        <td><%= link_to 'Edit', edit_submission_path(submission) %></td>
-        <td><%= link_to 'Destroy', submission, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to "#{submission.comments.size} comments", submission %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
 <%= link_to 'New Submission', new_submission_path %>
+<%= link_to 'New Community', new_community_path %>
+
