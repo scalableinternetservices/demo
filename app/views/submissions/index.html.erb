@@ -2,7 +2,7 @@
 
 <h1>Demo App</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Title</th>
@@ -18,13 +18,13 @@
         <td><%= link_to(submission.title, submission.url) %></td>
         <td><%= submission.url %></td>
         <td><%= submission.community.name %></td>
-        <td><%= link_to "#{submission.comments.size} comments", submission %></td>
+        <td><%= link_to "#{submission.comments.size} comments", submission, class: 'btn btn-primary btn-xs'  %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-<%= link_to 'New Submission', new_submission_path %>
-<%= link_to 'New Community', new_community_path %>
+<%= link_to 'New Submission', new_submission_path, class: 'btn btn-primary' %>
+<%= link_to 'New Community', new_community_path, class: 'btn btn-primary' %>
 

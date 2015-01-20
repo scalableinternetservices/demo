@@ -21,9 +21,9 @@
   </div>
   <div class="field">
     <%= f.label :community_id %><br>
-    <%= collection_select(:submission, :community_id, Community.all, :id, :name) %>
+    <%= collection_select(:submission, :community_id, Community.all, :id, :name, {}, {class: 'form-control'}) %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-primary' %>
   </div>
 <% end %>
