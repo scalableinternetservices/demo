@@ -12,17 +12,19 @@
 
 <p>
   <strong>Community:</strong>
-  <%= @submission.community %>
+  <%= @submission.community.name %>
 </p>
 
 <div>
   <%= link_to("Comment on this submission", controller: "comments", action: "new", comment: {submission_id: @submission.id} ) %>
 </div>
 
-<div>
-  Comments:<br>
-  <%= render @submission.root_comments %>
-</div>
+<% if @submission.root_comments.size > 0 %>
+  <div>
+    Comments:<br>
+    <%= render @submission.root_comments %>
+  </div>
+<% end %>
 
 <%= link_to 'Edit', edit_submission_path(@submission) %> |
 <%= link_to 'Back', submissions_path %>
