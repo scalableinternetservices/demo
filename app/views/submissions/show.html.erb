@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 
 <p>
   <strong>Title:</strong>
@@ -16,7 +15,7 @@
 </p>
 
 <div>
-  <%= link_to("Comment on this submission", controller: "comments", action: "new", comment: {submission_id: @submission.id} ) %>
+  <%= link_to("Comment on this submission", {controller: "comments", action: "new", comment: {submission_id: @submission.id}}, {class: 'btn btn-primary'} ) %>
 </div>
 
 <% if @submission.root_comments.size > 0 %>
@@ -26,5 +25,3 @@
   </div>
 <% end %>
 
-<%= link_to 'Edit', edit_submission_path(@submission) %> |
-<%= link_to 'Back', submissions_path %>
