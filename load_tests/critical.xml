@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<!DOCTYPE tsung SYSTEM "/home/ec2-user/opt/tsung-1.5.0/share/tsung/tsung-1.0.dtd">
+<tsung loglevel="notice" version="1.0">
+
+  <!-- Client side setup -->
+  <clients>
+    <client host="localhost" use_controller_vm="true" maxusers='15000'/>
+  </clients>
+
+  <!-- Server side setup -->
+  <servers>
+    <server host="ec2-54-148-61-114.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
+  </servers>
+
+
+  <load>
+    <arrivalphase phase="1" duration="30" unit="second">
+      <users arrivalrate="1" unit="second"></users>
+    </arrivalphase>
+    <arrivalphase phase="2" duration="30" unit="second">
+      <users arrivalrate="2" unit="second"></users>
+    </arrivalphase>
+    <arrivalphase phase="3" duration="30" unit="second">
+      <users arrivalrate="4" unit="second"></users>
+    </arrivalphase>
+<!--
+   <arrivalphase phase="4" duration="30" unit="second">
+     <users arrivalrate="8" unit="second"></users>
+   </arrivalphase>
+   <arrivalphase phase="5" duration="30" unit="second">
+     <users arrivalrate="16" unit="second"></users>
+   </arrivalphase>
+   <arrivalphase phase="6" duration="30" unit="second">
+     <users arrivalrate="32" unit="second"></users>
+   </arrivalphase>
+   <arrivalphase phase="7" duration="30" unit="second">
+     <users arrivalrate="64" unit="second"></users>
+   </arrivalphase>
+   <arrivalphase phase="8" duration="30" unit="second">
+     <users arrivalrate="128" unit="second"></users>
+   </arrivalphase>
+   <arrivalphase phase="9" duration="30" unit="second">
+     <users arrivalrate="256" unit="second"></users>
+   </arrivalphase>
+   <arrivalphase phase="10" duration="30" unit="second">
+     <users arrivalrate="512" unit="second"></users>
+   </arrivalphase>
+-->
+  </load>
+
+  <options>
+    <!-- Set connection timeout to 2 seconds -->
+    <option name="glocal_ack_timeout" value="2000"></option>
+
+    <option type="ts_http" name="user_agent">
+      <user_agent probability="100">Mozilla/5.0 (Windows; U; Windows NT 5.2; fr-FR; rv:1.7.8) Gecko/20050511 Firefox/1.0.4</user_agent>
+    </option>
+  </options>
+
+  <sessions>
+    <session name="http-example" probability="100" type="ts_http">
+
+      <!-- start out at the dashboard. -->
+      <request>
+        <http url='/' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- wait for up to 2 seconds, user is looking at posts -->
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- visit the New Community form, as a user would do.  -->
+      <request>
+        <http url='/communities/new' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- wait for up to 2 seconds, user is filling out new community form -->
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- create a random number to make a unique community name -->
+      <setdynvars sourcetype="random_number" start="1000" end="9999999">
+        <var name="random_community_name" />
+      </setdynvars>
+
+      <!-- post to /communities to create a community.
+           remember the url of the created community so we can delete it later -->
+      <request subst="true">
+        <dyn_variable name="created_community_url" re="[Ll]ocation: (http://.*)\r"/>
+        <dyn_variable name="created_community_id" re="[Ll]ocation: http://.*/communities/(.*)\r"/>
+        <http
+          url='/communities'
+          version='1.1'
+          method='POST'
+          contents='community%5Bname%5D=community_name_%%_random_community_name%%&amp;commit=Create+Community'>
+        </http>
+      </request>
+
+      <!-- visit the new submission form, as a user would do.  -->
+      <request>
+        <http url='/submissions/new' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- wait for up to 2 seconds, user is fillinf in new submission form -->
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- create a new submission in the community we just created -->
+      <setdynvars sourcetype="random_number" start="1000" end="9999999">
+        <var name="random_submission_name" />
+      </setdynvars>
+
+      <request subst="true">
+        <dyn_variable name="created_submission_url" re="[Ll]ocation: (http://.*)\r"/>
+        <dyn_variable name="created_submission_id" re="[Ll]ocation: http://.*/submissions/(.*)\r"/>
+        <http
+          url='/submissions'
+          version='1.1'
+          method='POST'
+          contents='submission%5Btitle%5D=link_%%_random_submission_name%%&amp;submission%5Burl%5D=http%3A%2F%2Fwww.article.com%2F%%_random_submission_name%%&amp;submission%5Bcommunity_id%5D=%%_created_community_id%%&amp;commit=Create+Submission'>
+        </http>
+      </request>
+
+      <!-- wait for up to 2 seconds, user decides to delete submission -->
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- delete the submission we just created -->
+      <request subst="true">
+        <http url="%%_created_submission_url%%" method="DELETE">
+        </http>
+      </request>
+
+      <!-- wait for up to 2 seconds, user decides to delete community -->
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- Uncomment the following to debug print your dynamic variables  --> 
+      <!--
+      <setdynvars sourcetype="eval" code="fun( {Pid, DynVars} ) ->
+        io:format([126, $p, 126, $n, 126, $n], [DynVars]),
+        ok end.">
+        <var name="dump" />
+      </setdynvars>
+      -->
+
+      <!-- delete the community we created -->
+
+      <request subst="true">
+        <http url="%%_created_community_url%%" method="DELETE">
+        </http>
+      </request>
+
+    </session>
+  </sessions>
+</tsung>
