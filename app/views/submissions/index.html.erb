@@ -1,6 +1,8 @@
-<h1>Front Page!</h1>
+<% cache(cache_key_for_submission_table) do %>
+  <h1>Front Page!</h1>
 
-<%= render partial: 'listing', locals: { submissions: @submissions } %>
+  <%= render partial: 'listing', locals: { submissions: @submissions } %>
 
-<%= link_to 'New Submission', new_submission_path, class: 'btn btn-primary' %>
-<%= link_to 'New Community', new_community_path, class: 'btn btn-primary' %>
+  <%= link_to 'New Submission', new_submission_path, class: 'btn btn-primary' %>
+  <%= link_to 'New Community', new_community_path, class: 'btn btn-primary' %>
+<% end %>
