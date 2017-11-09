@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
-<!DOCTYPE tsung SYSTEM "/home/ec2-user/opt/tsung-1.5.0/share/tsung/tsung-1.0.dtd">
-<tsung loglevel="notice" version="1.0">
-
+<!DOCTYPE tsung SYSTEM "/usr/local/share/tsung/tsung-1.0.dtd" [] >
+<tsung loglevel="notice">
   <!-- Client side setup -->
   <clients>
     <client host="localhost" use_controller_vm="true" maxusers='15000'/>
