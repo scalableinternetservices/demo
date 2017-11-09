@@ -80,6 +80,7 @@ GEM
     nio4r (2.1.0)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
+    pg (0.21.0)
     public_suffix (3.0.1)
     puma (3.10.0)
     rack (2.0.3)
@@ -174,6 +175,7 @@ DEPENDENCIES
   listen
   multi_json
   newrelic_rpm
+  pg
   puma
   rails (= 5.1.4)
   rails-controller-testing
