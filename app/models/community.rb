@@ -1,4 +1,4 @@
-class Community < ActiveRecord::Base
+class Community < ApplicationRecord
   has_many :submissions
 
   validates :name, uniqueness: true

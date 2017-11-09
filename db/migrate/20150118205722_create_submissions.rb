@@ -1,9 +1,9 @@
-class CreateSubmissions < ActiveRecord::Migration
+class CreateSubmissions < ActiveRecord::Migration[5.1]
   def change
     create_table :submissions do |t|
-      t.string :title
-      t.string :url
-      t.references :community, index: true
+      t.string :title, null: false
+      t.string :url, null: false
+      t.references :community, index: true, null: false
 
       t.timestamps null: false
     end

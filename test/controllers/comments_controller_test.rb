@@ -7,41 +7,41 @@ class CommentsControllerTest < ActionController::TestCase
 
   test "should get index" do
     get :index
-    assert_response :success
+    assert_response :ok
     assert_not_nil assigns(:comments)
   end
 
   test "should get new" do
-    get :new, comment: { submission_id: @comment.submission_id }
-    assert_response :success
+    get :new, params: { comment: { submission_id: @comment.submission_id } }
+    assert_response :ok
   end
 
   test "should create comment" do
     assert_difference('Comment.count') do
-      post :create, comment: { message: @comment.message, parent_id: @comment.parent_id, submission_id: @comment.submission_id }
+      post :create, params: { comment: { message: @comment.message, parent_id: @comment.parent_id, submission_id: @comment.submission_id } }
     end
 
     assert_redirected_to submission_path(assigns(:comment).submission)
   end
 
   test "should show comment" do
-    get :show, id: @comment
-    assert_response :success
+    get :show, params: { id: @comment }
+    assert_response :ok
   end
 
   test "should get edit" do
-    get :edit, id: @comment
-    assert_response :success
+    get :edit, params: { id: @comment }
+    assert_response :ok
   end
 
   test "should update comment" do
-    patch :update, id: @comment, comment: { message: @comment.message, parent_id: @comment.parent_id, submission_id: @comment.submission_id }
+    patch :update, params: { id: @comment, comment: { message: @comment.message, parent_id: @comment.parent_id, submission_id: @comment.submission_id } }
     assert_redirected_to comment_path(assigns(:comment))
   end
 
   test "should destroy comment" do
     assert_difference('Comment.count', -1) do
-      delete :destroy, id: @comment
+      delete :destroy, params: { id: @comment }
     end
 
     assert_redirected_to comments_path
