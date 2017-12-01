@@ -3,4 +3,4 @@
 <%= render partial: 'listing', locals: { submissions: @community.submissions.reverse_order } %>
 
 <br>
-<%= link_to 'New Submission', new_submission_path, class: 'btn btn-primary' %>
+<%= link_to 'New Submission', new_submission_path(community_id: @community.id), class: 'btn btn-primary' %>

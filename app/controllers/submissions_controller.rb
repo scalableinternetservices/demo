@@ -23,7 +23,7 @@ class SubmissionsController < ApplicationController
   end
 
   def new
-    @submission = Submission.new
+    @submission = Submission.new(community_id: params['community_id'])
   end
 
   def show; end
