@@ -1,31 +1,32 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class CommunityTest < ActiveSupport::TestCase
-  test 'create community success' do
-    community = Community.new name: 'Good'
-    assert community.valid?
-
-    community = Community.new name: 'A really long valid community name'
-    assert community.valid?
+  test 'can access expected attributes' do
+    community = new_community
+    assert_equal [], community.submissions
   end
 
-  test 'community name must be at least 4 characters' do
-    community = Community.new name: nil
-    assert community.invalid?
+  test 'fail to create community with too short of a name' do
+    [nil, '', 'bad'].each do |name|
+      community = new_community(name: name)
+      assert_predicate community, :invalid?
+      assert_equal({ name: ['is too short (minimum is 4 characters)'] }, community.errors.messages)
+    end
 
-    community = Community.new name: ''
-    assert community.invalid?
-
-    community = Community.new name: 'Bad'
-    assert community.invalid?
-
-    community = Community.new name: 1
-    assert community.invalid?
+    assert_predicate new_community(name: 'good'), :valid?
   end
 
-  test 'community name must be unique' do
-    community = Community.new name: communities(:one).name
-    assert community.invalid?
+  test 'fail to create duplicate community' do
+    new_community.save!
+
+    community = new_community
+    assert_predicate community, :invalid?
     assert_equal({ name: ['has already been taken'] }, community.errors.messages)
+  end
+
+  test 'successfully create community' do
+    assert_predicate new_community, :valid?
   end
 end

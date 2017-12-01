@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 class Submission < ApplicationRecord
   belongs_to :community
   has_many :comments
 
-  validates :community, presence: true
-  validates :title, length: { minimum: 5 }, uniqueness: true
+  validates :title, length: { minimum: 5 }
   validates :url, url: true
 
   def root_comments

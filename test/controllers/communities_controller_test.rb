@@ -1,49 +1,50 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class CommunitiesControllerTest < ActionController::TestCase
-  setup do
-    @community = communities(:one)
+  test 'should create community' do
+    assert_difference('Community.count') do
+      post :create, params: { community: { name: 'Programming' } }
+    end
+    assert_redirected_to community_path(Community.last)
+    assert_equal 'Community was successfully created.', flash[:notice]
   end
 
-  test "should get index" do
-    get :index
-    assert_response :ok
-    assert_not_nil assigns(:communities)
+  test 'should destroy community' do
+    new_community.save!
+
+    assert_difference('Community.count', -1) do
+      delete :destroy, params: { id: Community.last }
+    end
+    assert_redirected_to root_path
+    assert_equal 'Community was successfully destroyed.', flash[:notice]
   end
 
-  test "should get new" do
+  test 'should fail to create community' do
+    assert_no_difference('Community.count') do
+      post :create, params: { community: { name: nil } }
+    end
+    assert_response :unprocessable_entity
+  end
+
+  test 'should get new' do
     get :new
     assert_response :ok
+    assert_select 'form[action=?]', communities_path
   end
 
-  test "should create community" do
-    assert_difference('Community.count') do
-      post :create, params: { community: { name: "Programming" } }
-    end
+  test 'should show community' do
+    new_community(name: 'Unique Name').save!
 
-    assert_redirected_to community_path(assigns(:community))
-  end
-
-  test "should show community" do
-    get :show, params: { id: @community }
+    get :show, params: { id: Community.last }
     assert_response :ok
+    assert_select 'h1', 'Unique Name'
   end
 
-  test "should get edit" do
-    get :edit, params: { id: @community }
-    assert_response :ok
-  end
+  private
 
-  test "should update community" do
-    patch :update, params: { id: @community, community: { name: @community.name } }
-    assert_redirected_to community_path(assigns(:community))
-  end
-
-  test "should destroy community" do
-    assert_difference('Community.count', -1) do
-      delete :destroy, params: { id: @community }
-    end
-
-    assert_redirected_to communities_path
+  def new_community(name: 'Valid Community')
+    Community.new(name: name)
   end
 end
