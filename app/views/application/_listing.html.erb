@@ -1,0 +1,21 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Url</th>
+      <th>Community</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% submissions.each do |submission| %>
+      <tr>
+        <td><%= link_to(submission.title, submission.url) %></td>
+        <td><%= submission.url %></td>
+        <td><%= link_to submission.community.name, submission.community %></td>
+        <td><%= link_to "#{submission.comments.size} comments", submission, class: 'btn btn-primary btn-xs'  %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

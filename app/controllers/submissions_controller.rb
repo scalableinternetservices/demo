@@ -19,7 +19,7 @@ class SubmissionsController < ApplicationController
   end
 
   def index
-    @submissions = Submission.all
+    @submissions = Submission.all.reverse_order
   end
 
   def new

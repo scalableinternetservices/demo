@@ -1,3 +1,6 @@
-<p id="notice"><%= notice %></p>
-
 <h1><%= @community.name %></h1>
+
+<%= render partial: 'listing', locals: { submissions: @community.submissions.reverse_order } %>
+
+<br>
+<%= link_to 'New Submission', new_submission_path, class: 'btn btn-primary' %>
