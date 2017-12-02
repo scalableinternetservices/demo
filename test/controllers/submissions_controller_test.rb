@@ -46,6 +46,6 @@ class SubmissionsControllerTest < ActionController::TestCase
 
     get :show, params: { id: submission }
     assert_response :ok
-    assert_select 'h1', 'Unique Title'
+    assert_select 'h1', 'Unique Title (via Community)'
   end
 end
