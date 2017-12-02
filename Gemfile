@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 gem 'faker'
 gem 'puma'
 gem 'rails', '5.1.4'
+gem 'simple_form'
 gem 'uglifier'
 gem 'validate_url'
 

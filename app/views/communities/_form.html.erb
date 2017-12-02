@@ -1,21 +1,4 @@
-<%= form_for(@community) do |f| %>
-  <% if @community.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@community.errors.count, "error") %> prohibited this community from being saved:</h2>
-
-      <ul>
-      <% @community.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="actions">
-    <%= f.submit class: 'btn btn-primary' %>
-  </div>
+<%= simple_form_for(@community) do |form| %>
+  <%= form.input :name, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+  <%= form.button :submit, class: 'btn-primary btn-sm' %>
 <% end %>

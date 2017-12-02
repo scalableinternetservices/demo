@@ -1,29 +1,6 @@
-<%= form_for(@submission) do |f| %>
-  <% if @submission.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@submission.errors.count, "error") %> prohibited this submission from being saved:</h2>
-
-      <ul>
-      <% @submission.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title, class: 'form-control' %>
-  </div>
-  <div class="field">
-    <%= f.label :url %><br>
-    <%= f.text_field :url, class: 'form-control'  %>
-  </div>
-  <div class="field">
-    <%= f.label :community_id %><br>
-    <%= collection_select(:submission, :community_id, Community.all, :id, :name, {}, {class: 'form-control'}) %>
-  </div>
-  <div class="actions">
-    <%= f.submit class: 'btn btn-primary' %>
-  </div>
+<%= simple_form_for(@submission) do |form| %>
+  <%= form.input :title, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+  <%= form.input :url, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+  <%= form.input :community_id, collection: Community.all, include_blank: false, input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' } %>
+  <%= form.button :submit, class: 'btn-primary btn-sm' %>
 <% end %>
