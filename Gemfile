@@ -3,9 +3,9 @@
 source 'https://rubygems.org'
 
 gem 'faker'
-gem 'jquery-rails'
 gem 'puma'
 gem 'rails', '5.1.4'
+gem 'uglifier'
 gem 'validate_url'
 
 group :development do

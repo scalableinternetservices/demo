@@ -1,9 +1,19 @@
-<div class="well well-sm" style="margin-top: 20px">
-  <%= comment.message %><br>
-  <%= link_to("Reply",
-              {controller: "comments",
-              action: "new",
-              comment: {parent_id: comment.id, submission_id: comment.submission.id}},
-              class: 'btn btn-primary btn-xs') %>
-  <%= render comment.replies %>
+<div class="card bg-light">
+  <div class="card-body">
+    <%= comment.message %><br>
+    <%= link_to("Reply",
+                {
+                  controller: "comments",
+                  action: "new",
+                  comment: {parent_id: comment.id, submission_id: comment.submission.id}
+                },
+                class: 'btn btn-primary btn-sm') %>
+    <%= link_to("Delete",
+                comment_path(comment),
+                class: 'btn btn-danger btn-sm',
+                data: { confirm: 'Are you sure?'},
+                method: :delete) %>
+
+    <%= render comment.replies %>
+  </div>
 </div>

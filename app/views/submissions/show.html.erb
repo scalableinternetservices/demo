@@ -1,17 +1,10 @@
 
-<h1><%= @submission.title %></h1>
-<p>
-  <strong>Url:</strong>
-  <%= @submission.url %>
-</p>
-
-<p>
-  <strong>Community:</strong>
-  <%= @submission.community.name %>
-</p>
+<h1><%= @submission.title %> (via <%= link_to @submission.community.name, @submission.community %>)</h1>
+<p><%= link_to @submission.url %></p>
 
 <div>
-  <%= link_to("Comment on this submission", {controller: "comments", action: "new", comment: {submission_id: @submission.id}}, {class: 'btn btn-primary'} ) %>
+  <%= link_to("Comment", {controller: "comments", action: "new", comment: {submission_id: @submission.id}}, {class: 'btn btn-primary btn-sm'} ) %>
+  <%= link_to("Delete Submission", submission_path(@submission), class: 'btn btn-danger btn-sm', data: { confirm: 'Are you sure?'}, method: :delete) %>
 </div>
 
 <% if @submission.root_comments.size > 0 %>
