@@ -26,7 +26,9 @@ class SubmissionsController < ApplicationController
     @submission = Submission.new(community_id: params['community_id']) if stale?(Community.all)
   end
 
-  def show; end
+  def show
+    fresh_when([@submission, @submission.community, @submission.comments])
+  end
 
   private
 
