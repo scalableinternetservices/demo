@@ -19,7 +19,9 @@ class SubmissionsController < ApplicationController
   end
 
   def index
-    @submissions = Submission.all.reverse_order
+    if stale?([Submission.all, Community.all, Comment.all])
+      @submissions = Submission.all.reverse_order
+    end
   end
 
   def new
