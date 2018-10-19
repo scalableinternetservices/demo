@@ -31,7 +31,11 @@ class SubmissionsController < ApplicationController
   private
 
   def set_submission
-    @submission = Submission.find(params[:id])
+    @submission = Submission.includes(:root_comments => :submission)
+                            .includes(:root_comments => {:replies => [:parent, :submission]})
+                            .includes(:root_comments => {:replies => {:replies => [:parent, :submission]}})
+                            .includes(:root_comments => {:replies => {:replies => {:replies => [:parent, :submission]}}})
+                            .find(params[:id])
   end
 
   def submission_params
