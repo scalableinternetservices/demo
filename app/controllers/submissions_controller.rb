@@ -23,7 +23,7 @@ class SubmissionsController < ApplicationController
   end
 
   def new
-    @submission = Submission.new(community_id: params['community_id'])
+    @submission = Submission.new(community_id: params['community_id']) if stale?(Community.all)
   end
 
   def show; end
