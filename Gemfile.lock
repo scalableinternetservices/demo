@@ -146,5 +146,8 @@ DEPENDENCIES
   uglifier
   validate_url
 
+RUBY VERSION
+   ruby 2.5.1p57
+
 BUNDLED WITH
-   1.15.4
+   1.16.6
