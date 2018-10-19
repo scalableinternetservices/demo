@@ -5,7 +5,7 @@ ruby '2.5.1'
 
 gem 'faker'
 gem 'puma'
-gem 'rails', '5.1.4'
+gem 'rails', '~> 5.2'
 gem 'simple_form'
 gem 'uglifier'
 gem 'validate_url'
