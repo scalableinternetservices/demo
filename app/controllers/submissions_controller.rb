@@ -19,7 +19,7 @@ class SubmissionsController < ApplicationController
   end
 
   def index
-    @submissions = Submission.all.reverse_order
+    @submissions = Submission.includes(:comments).includes(:community).all.reverse_order
   end
 
   def new
