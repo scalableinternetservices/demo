@@ -139,10 +139,10 @@ eb create -db.engine postgres -db.i DB_INSTANCE_TYPE -db.user u --envvars SECRET
 Replace `DB_INSTANCE_TYPE` with one of:
 
 ---
-* ($0.182) db.m4.large  2 vCPU / 8 GiB
-* ($0.365) db.m4.xlarge  4 vCPU / 16 GiB
-* ($0.730) db.m4.2xlarge  8 vCPU / 32 GiB
-* ($1.461) db.m4.4xlarge  16 vCPU / 64 GiB
+* ($0.178) db.m5.large  2 vCPU / 8 GiB
+* ($0.356) db.m5.xlarge  4 vCPU / 16 GiB
+* ($0.712) db.m5.2xlarge  8 vCPU / 32 GiB
+* ($1.424) db.m5.4xlarge  16 vCPU / 64 GiB
 ---
 * ($0.250) db.r4.large  2 vCPU / 15.25 GiB
 * ($0.500) db.r4.xlarge  4 vCPU / 30.5 GiB
