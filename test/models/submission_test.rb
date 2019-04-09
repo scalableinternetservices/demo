@@ -11,7 +11,7 @@ class SubmissionTest < ActiveSupport::TestCase
   end
 
   test 'fail to create submission with an invalid url' do
-    [nil, '', 'bad1'].each do |url|
+    ['', 'bad1'].each do |url|
       submission = new_submission(url: url)
       assert_predicate submission, :invalid?
       assert_equal({ url: ['is not a valid URL'] }, submission.errors.messages)

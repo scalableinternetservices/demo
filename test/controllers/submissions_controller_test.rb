@@ -25,7 +25,7 @@ class SubmissionsControllerTest < ActionController::TestCase
 
   test 'should fail to create submission' do
     assert_no_difference('Submission.count') do
-      post :create, params: { submission: { title: nil } }
+      post :create, params: { submission: { title: '', url: '' } }
     end
     assert_response :unprocessable_entity
   end
